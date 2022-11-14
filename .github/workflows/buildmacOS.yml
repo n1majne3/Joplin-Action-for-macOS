@@ -39,7 +39,7 @@ jobs:
         
     - name: modify the traget
       run: |
-      # sed -i '' 's/\"target\": \"dmg\",/\"target\": \{\"target\": \"default\",\"arch\": \[\"x64\",\"arm64\"]},/g' joplin/packages/app-desktop/package.json
+      sed -i '' 's/\"target\": \"dmg\",/\"target\": \{\"target\": \"default\",\"arch\": \[\"x64\",\"arm64\"]},/g' joplin/packages/app-desktop/package.json
         
     - name: Initialization environment
       run: |      
