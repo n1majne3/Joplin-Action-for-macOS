@@ -34,14 +34,12 @@ jobs:
     - name: Clone source code      
       run: |        
         git clone $REPO_URL -b $REPO_BRANCH joplin
-        # ln -sf /workdir/openwrt $GITHUB_WORKSPACE/joplin
-        
-    - name: Setup Debug Session
-      uses: csexton/debugger-action@master
+        # ln -sf /workdir/openwrt $GITHUB_WORKSPACE/joplin        
+    
         
     - name: modify the traget
       run: |
-      # sed 's/\"target\": \"dmg\",/\"target\": \{\"target\": \"default\",\"arch\": \[\"x64\",\"arm64\"]},/g' -i joplin/packages/app-desktop/package.json
+      # sed -i '' 's/\"target\": \"dmg\",/\"target\": \{\"target\": \"default\",\"arch\": \[\"x64\",\"arm64\"]},/g' joplin/packages/app-desktop/package.json
         
     - name: Initialization environment
       run: |      
@@ -58,5 +56,7 @@ jobs:
     - name: Upload firmware directory
       uses: actions/upload-artifact@main      
       with:
-        path: 'packages/app-desktop/dist'
+        path: |
+          'packages/app-desktop/dist/Joplin-*-arm64.dmg'
+          'packages/app-desktop/dist/Joplin-*-mac.dmg'
     
