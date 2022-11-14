@@ -11,8 +11,8 @@ env:
 jobs:
   build:
     runs-on: macos-latest
-    steps:
-    - uses: actions/checkout@v2
+    # steps:
+    # - uses: actions/checkout@v2
         
     - name: Set npm config flags
       run: |
