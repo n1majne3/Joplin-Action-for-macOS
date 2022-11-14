@@ -39,14 +39,12 @@ jobs:
         # ln -sf /workdir/openwrt $GITHUB_WORKSPACE/joplin
         
         # modify the traget 
-        sed  's/\"target\": \"dmg\",/\"target\": \{,\
+        sed 's/\"target\": \"dmg\",/\"target\": \{\
         \"target\": \"default\", \
         \"arch\": \[ \
           \"x64\", \
           \"arm64\" \
-        ]\
-        },/g' \
-        -i joplin/packages/app-desktop/package.json
+        ]},/g' -i joplin/packages/app-desktop/package.json
         
     - name: Initialization environment
       run: |      
