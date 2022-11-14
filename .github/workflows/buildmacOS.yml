@@ -17,8 +17,7 @@ jobs:
               
     - name: Install npm packages
       run: |
-        sysctl hw.model
-        sysctl -n machdep.cpu.brand_string
+    
         # npm install sharp
         # For some reason npm will throw errors if keytar not built beforehand
         # npm install Keytar —build-from-source 
@@ -59,6 +58,6 @@ jobs:
       uses: actions/upload-artifact@main      
       with:
         path: |
-          'packages/app-desktop/dist/Joplin-*-arm64.dmg'
-          'packages/app-desktop/dist/Joplin-*-mac.dmg'
+          'joplin/packages/app-desktop/dist/Joplin-*-arm64.dmg'
+          'joplin/packages/app-desktop/dist/Joplin-*-mac.dmg'
     
