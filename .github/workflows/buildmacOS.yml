@@ -45,6 +45,6 @@ jobs:
       uses: actions/upload-artifact@main      
       with:
         path: |
-          'joplin/packages/app-desktop/dist/Joplin-*-arm64.dmg'
-          'joplin/packages/app-desktop/dist/Joplin-*-mac.dmg'
+          'joplin/packages/app-desktop/dist/*.dmg'          
+          'packages/app-desktop/dist/*.dmg'          
     
