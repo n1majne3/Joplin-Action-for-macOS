@@ -17,6 +17,8 @@ jobs:
               
     - name: Install npm packages
       run: |
+        sysctl hw.model
+        sysctl -n machdep.cpu.brand_string
         # npm install sharp
         # For some reason npm will throw errors if keytar not built beforehand
         # npm install Keytar —build-from-source 
