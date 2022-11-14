@@ -34,6 +34,7 @@ jobs:
 
     - name: Build & pack
       run: |
+        pwd
         cd joplin
         # yarn install
         cd packages/app-desktop
