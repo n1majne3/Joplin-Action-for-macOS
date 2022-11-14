@@ -31,20 +31,17 @@ jobs:
         export sdkroot=macosx
         npm config set python python3
         
-    - name: Clone source code
-      
-      run: |
-        
+    - name: Clone source code      
+      run: |        
         git clone $REPO_URL -b $REPO_BRANCH joplin
         # ln -sf /workdir/openwrt $GITHUB_WORKSPACE/joplin
         
-        # modify the traget 
-        sed 's/\"target\": \"dmg\",/\"target\": \{\
-        \"target\": \"default\", \
-        \"arch\": \[ \
-          \"x64\", \
-          \"arm64\" \
-        ]},/g' -i joplin/packages/app-desktop/package.json
+    - name: Setup Debug Session
+      uses: csexton/debugger-action@master
+        
+    - name:modify the traget 
+      run:|
+      sed 's/\"target\": \"dmg\",/\"target\": \{  \"target\": \"default\",   \"arch\": \[  \"x64\",  \"arm64\" ]},/g' -i joplin/packages/app-desktop/package.json
         
     - name: Initialization environment
       run: |      
