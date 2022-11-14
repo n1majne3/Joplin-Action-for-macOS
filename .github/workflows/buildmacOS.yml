@@ -39,9 +39,9 @@ jobs:
     - name: Setup Debug Session
       uses: csexton/debugger-action@master
         
-    - name:modify the traget 
-      run:|
-      sed 's/\"target\": \"dmg\",/\"target\": \{  \"target\": \"default\",   \"arch\": \[  \"x64\",  \"arm64\" ]},/g' -i joplin/packages/app-desktop/package.json
+    - name: modify the traget
+      run: |
+      # sed 's/\"target\": \"dmg\",/\"target\": \{\"target\": \"default\",\"arch\": \[\"x64\",\"arm64\"]},/g' -i joplin/packages/app-desktop/package.json
         
     - name: Initialization environment
       run: |      
