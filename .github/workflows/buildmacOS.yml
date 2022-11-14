@@ -14,17 +14,6 @@ jobs:
     runs-on: macos-latest
     steps:
     - uses: actions/checkout@v2
-    
-    
-              
-    - name: Install npm packages
-      run: |
-    
-        # npm install sharp
-        # For some reason npm will throw errors if keytar not built beforehand
-        # npm install Keytar —build-from-source 
-        # npm install -g @dennisameling/keytar-temp@7.4.99 ## Alt keytar if above does not work
-        # npm install sqlite3@4.1.0 —build-from-source ## Might not be necessary, run if build fails in step 3
         
     - name: Set npm config flags
       run: |
@@ -36,15 +25,13 @@ jobs:
         
     - name: Clone source code      
       run: |        
-        git clone $REPO_URL -b $REPO_BRANCH joplin
-        # ln -sf /workdir/openwrt $GITHUB_WORKSPACE/joplin        
-    
+        git clone $REPO_URL -b $REPO_BRANCH joplin   
         
     - name: modify the traget
       run: |
         sed -i '' 's/\"target\": \"dmg\",/\"target\": \{\"target\": \"default\",\"arch\": \[\"x64\",\"arm64\"]},/g' joplin/packages/app-desktop/package.json
         
-    - name: Initialization environment
+    - name: Initializate environment
       run: |      
         brew install vips
 
@@ -52,8 +39,7 @@ jobs:
       run: |
         cd joplin
         yarn install
-        cd packages/app-desktop      
-        # if it runs successfully, time to package
+        cd packages/app-desktop
         yarn run dist --publish=never --mac --arm64
 
     - name: Upload firmware directory
