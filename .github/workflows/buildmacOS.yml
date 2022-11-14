@@ -39,12 +39,12 @@ jobs:
         cd joplin
         yarn install
         cd packages/app-desktop
-        yarn run dist --publish=never --mac --arm64
+        yarn run dist --publish=never --mac --arm64        
 
     - name: Upload firmware directory
       uses: actions/upload-artifact@main      
       with:
         path: |
-          'joplin/packages/app-desktop/dist/*.dmg'          
-          'packages/app-desktop/dist/*.dmg'          
+          'dist/*.dmg'       
+              
     
