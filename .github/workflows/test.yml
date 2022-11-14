@@ -40,6 +40,10 @@ jobs:
         cd packages/app-desktop
         # yarn run dist --publish=never --mac --arm64
         env
+        
+    - name: pwd
+      run: |
+        pwd
 
     - name: Upload firmware directory
       uses: actions/upload-artifact@main      
