@@ -1,2 +1,3 @@
 # Joplin-Action-for-macOS
-This is for building arm64 and x64 versions of dmg packages for Joplin.
+
+Action is for building arm64 and x64 versions of dmg packages for [Joplin](https://github.com/laurent22/joplin).
