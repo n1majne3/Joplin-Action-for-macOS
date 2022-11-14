@@ -13,9 +13,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     
-    - name: Initialization environment
-      run: |      
-        brew install vips
+    
               
     - name: Install npm packages
       run: |
@@ -34,10 +32,11 @@ jobs:
         npm config set python python3
         
     - name: Clone source code
-      working-directory: /workdir
+      
       run: |
+        
         git clone $REPO_URL -b $REPO_BRANCH joplin
-        ln -sf /workdir/openwrt $GITHUB_WORKSPACE/joplin
+        # ln -sf /workdir/openwrt $GITHUB_WORKSPACE/joplin
         
         # modify the traget 
         sed  's/\"target\": \"dmg\",/\"target\": \{,\
@@ -48,6 +47,10 @@ jobs:
         ]\
         },/g' \
         -i joplin/packages/app-desktop/package.json
+        
+    - name: Initialization environment
+      run: |      
+        brew install vips
 
     - name: Install npm packages
       run: |
