@@ -1,4 +1,4 @@
-name: buildmacOS
+name: test
 
 # on: [push, pull_request]
 on: 
