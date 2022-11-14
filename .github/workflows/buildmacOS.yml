@@ -45,6 +45,5 @@ jobs:
       uses: actions/upload-artifact@main      
       with:
         path: |
-          'joplin/packages/app-desktop/dist/*.dmg'       
-              
+          "${{ github.workspace }}/**/*.dmg"
     
