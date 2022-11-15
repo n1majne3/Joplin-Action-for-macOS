@@ -1,4 +1,4 @@
-name: buildmacOS
+name: build_ubuntu
 
 on: 
   workflow_dispatch:
