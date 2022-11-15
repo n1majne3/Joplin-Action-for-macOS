@@ -10,8 +10,7 @@ env:
 
 jobs:  
 
-  Buildmacos:
-    needs: pre_job    
+  Buildmacos: 
     runs-on: ubuntu-latest
     steps:
       - name: Install Linux dependencies
@@ -27,19 +26,19 @@ jobs:
           corepack enable
           
       - name: Clone source code      
-      run: |        
-        git clone $REPO_URL -b $REPO_BRANCH joplin        
+        run: |        
+          git clone $REPO_URL -b $REPO_BRANCH joplin        
         
       - name: modify the traget
-      run: |
-        sed -i '' 's/\"target\": \"dmg\",/\"target\": \{\"target\": \"default\",\"arch\": \[\"x64\",\"arm64\", \"universal\"]},/g' joplin/packages/app-desktop/package.json
+        run: |
+          sed -i '' 's/\"target\": \"dmg\",/\"target\": \{\"target\": \"default\",\"arch\": \[\"x64\",\"arm64\", \"universal\"]},/g' joplin/packages/app-desktop/package.json
         
       - name: Install
-       run: |
-         cd joplin
-         yarn install
-         cd packages/app-desktop
-         yarn run dist --publish=never --mac --arm64  
+        run: |
+          cd joplin
+          yarn install
+          cd packages/app-desktop
+          yarn run dist --publish=never --mac --arm64  
          
       - name: Upload firmware directory
         uses: actions/upload-artifact@main      
