@@ -1,0 +1,48 @@
+name: buildmacOS
+
+on: 
+  workflow_dispatch:
+
+env:
+  REPO_URL: https://github.com/laurent22/joplin
+  REPO_BRANCH: dev
+
+
+jobs:  
+
+  Buildmacos:
+    needs: pre_job    
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Linux dependencies
+        run: |
+          sudo apt-get update || true
+          sudo apt-get install -y libsecret-1-dev
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Install Yarn
+        run: |
+          corepack enable
+          
+      - name: Clone source code      
+      run: |        
+        git clone $REPO_URL -b $REPO_BRANCH joplin        
+        
+      - name: modify the traget
+      run: |
+        sed -i '' 's/\"target\": \"dmg\",/\"target\": \{\"target\": \"default\",\"arch\": \[\"x64\",\"arm64\", \"universal\"]},/g' joplin/packages/app-desktop/package.json
+        
+      - name: Install
+       run: |
+         cd joplin
+         yarn install
+         cd packages/app-desktop
+         yarn run dist --publish=never --mac --arm64  
+         
+      - name: Upload firmware directory
+        uses: actions/upload-artifact@main      
+        with:
+          path:
+            "**/*.dmg" 
