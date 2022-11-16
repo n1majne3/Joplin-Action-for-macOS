@@ -37,9 +37,9 @@ jobs:
 
     - name: Build & pack
       run: |
-        # cd joplin
-        # yarn install
-        # cd packages/app-desktop
+        cd joplin
+        yarn install
+        cd packages/app-desktop
         # yarn run dist --publish=never --mac --arm64
         yarn run dist --publish=never
         echo "DIST=$PWD/dist" >> $GITHUB_ENV
