@@ -32,7 +32,7 @@ jobs:
         
     - name: Initializate environment
       run: |      
-        # brew install vips
+        brew install vips
         node --version
 
     - name: Build & pack
