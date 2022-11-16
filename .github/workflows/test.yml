@@ -43,7 +43,8 @@ jobs:
         yarn install        
         cd packages/app-desktop
         # yarn run dist --publish=never --mac --arm64
-        yarn run dist --publish=never -mwl
+        yarn run dist --publish=never 
+        # yarn run dist --publish=never -mwl
         echo "DIST=$PWD/dist" >> $GITHUB_ENV              
         
     - name: Upload firmware to release
