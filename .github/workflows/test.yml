@@ -40,7 +40,7 @@ jobs:
         cd joplin
         
         yarn install
-        tag=cat package.json|grep \"version\"|awk  '{print $2}'|sed 's/"//g'
+        tag=cat package.json|grep \"version\"|awk  '{print $2}'|sed 's/"//g'|sed 's/,//g'
         echo "TAG=v$tag" >> $GITHUB_ENV
         echo $tag
         env
