@@ -32,7 +32,7 @@ jobs:
         
     - name: Initializate environment
       run: |      
-        brew install vips
+        # brew install vips
         node --version
 
     - name: Build & pack
@@ -40,7 +40,8 @@ jobs:
         cd joplin
         yarn install
         cd packages/app-desktop
-        yarn run dist --publish=never --mac --arm64        
+        # yarn run dist --publish=never --mac --arm64
+        yarn run dist
 
     - name: Upload firmware directory
       uses: actions/upload-artifact@main      
