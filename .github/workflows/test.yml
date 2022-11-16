@@ -31,8 +31,7 @@ jobs:
         sed -i '' 's/\"target\": \"dmg\",/\"target\": \{\"target\": \"default\",\"arch\": \[\"x64\",\"arm64\", \"universal\"]},/g' joplin/packages/app-desktop/package.json
         tag=$(cat joplin/packages/app-desktop/package.json|grep \"version\"|awk  '{print $2}'|sed 's/"//g'|sed 's/,//g')
         echo "TAG=v$tag" >> $GITHUB_ENV
-        echo $tag
-        env        
+             
     - name: Initializate environment
       run: |      
         brew install vips
@@ -44,7 +43,7 @@ jobs:
         yarn install        
         cd packages/app-desktop
         # yarn run dist --publish=never --mac --arm64
-        yarn run dist --publish=never
+        yarn run dist --publish=never -mwl
         echo "DIST=$PWD/dist" >> $GITHUB_ENV
               
         
@@ -56,13 +55,4 @@ jobs:
       with:
         tag_name: ${{ env.TAG }}     
         files: ${{ env.DIST }}/*
-    
-      
-
-    - name: Upload firmware directory
-      uses: actions/upload-artifact@main      
-      with:
-        path:
-          #"**/*.dmg"
-          ${{ env.DIST }}/*.dmg
     
