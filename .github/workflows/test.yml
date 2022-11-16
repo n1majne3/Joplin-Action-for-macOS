@@ -3,6 +3,9 @@ name: test
 # on: [push, pull_request]
 on: 
   workflow_dispatch:
+  schedule:
+    - cron: '0 22 * * 5'
+  
 
 env:
   REPO_URL: https://github.com/laurent22/joplin
