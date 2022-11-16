@@ -54,7 +54,6 @@ jobs:
         tag_name: ${{ env.TAG }}     
         files: |
           ${{ env.DIST }}/*.dmg
-          ${{ env.DIST }}/*.exe
           ${{ env.DIST }}/*.AppImage
 
     
