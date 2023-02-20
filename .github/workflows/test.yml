@@ -28,7 +28,7 @@ jobs:
         # export npm_config_arch=arm64
         # export npm_target_arch=arm64
         # export sdkroot=macosx
-        npm config set python python3
+        # npm config set python python3
         
     - name: Clone source code      
       run: |        
