@@ -37,6 +37,8 @@ jobs:
     - name: modify the traget
       run: |
         # sed -i '' 's/\"target\": \"dmg\",/\"target\": \{\"target\": \"default\",\"arch\": \[\"x64\",\"arm64\", \"universal\"]},/g' joplin/packages/app-desktop/package.json
+        sed -i 's/"electron-builder": "22.11.7"/"electron-builder": "23.0.6"/g' joplin/packages/app-desktop/package.json
+        
         tag=$(cat joplin/packages/app-desktop/package.json|grep \"version\"|awk  '{print $2}'|sed 's/"//g'|sed 's/,//g')
         echo "TAG=v$tag" >> $GITHUB_ENV
              
