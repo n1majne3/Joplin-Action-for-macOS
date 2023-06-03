@@ -18,7 +18,7 @@ jobs:
         RELEASE_VER=$(git -c 'versionsort.suffix=-' \
             ls-remote --exit-code --refs --sort='version:refname' --tags https://github.com/laurent22/joplin.git 'v*.*.*' \
             | tail --lines=1 \
-            | cut --delimiter='-' --fields=2-)
+            | cut --delimiter='/' --fields=3)
 
         LOCAL_VER=$(git -c 'versionsort.suffix=-' \
             ls-remote --exit-code --refs --sort='version:refname' --tags https://github.com/n1majne3/Joplin-Action-for-macOS.git \
