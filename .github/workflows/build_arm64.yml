@@ -38,6 +38,7 @@ jobs:
       run: |
         # sed -i '' 's/\"target\": \"dmg\",/\"target\": \{\"target\": \"default\",\"arch\": \[\"x64\",\"arm64\", \"universal\"]},/g' joplin/packages/app-desktop/package.json
         sed -i '' 's/"electron-builder": "22.11.7"/"electron-builder": "22.14.13"/g' joplin/packages/app-desktop/package.json
+        YARN_ENABLE_IMMUTABLE_INSTALLS=false
         # sed -i '' 's/electron-builder: 22.11.7/electron-builder: 22.14.13/g' joplin/yarn.lock
         
         tag=$(cat joplin/packages/app-desktop/package.json|grep \"version\"|awk  '{print $2}'|sed 's/"//g'|sed 's/,//g')
