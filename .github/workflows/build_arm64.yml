@@ -2,8 +2,6 @@ name: build_arm64
 
 # on: [push, pull_request]
 on:   
-  schedule:
-    - cron: '0 22 * * 5'
   push:
     tags:
       - 'v*.*.*'
