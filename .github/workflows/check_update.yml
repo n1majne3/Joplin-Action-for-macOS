@@ -7,14 +7,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  publish:
+  check_update:
     runs-on: ubuntu-latest
     steps:
 
     - name: Checkout Code
-      uses: actions/checkout@v3
-      with:
-        token: ${{ secrets.GH_PAT }} 
+      uses: actions/checkout@v2
 
     - run: |
         RELEASE_VER=$(git -c 'versionsort.suffix=-' \
