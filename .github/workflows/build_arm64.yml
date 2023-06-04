@@ -18,11 +18,9 @@ jobs:
     
     - uses: actions/checkout@v3
       with: 
-        repository: laurent22/joplin
-        token: ${{ secrets.GITHUB_TOKEN }}
+        repository: laurent22/joplin        
         ref: dev
-        path: joplin
-      
+        path: joplin      
         
     - name: Set npm config flags
       run: |
@@ -47,7 +45,7 @@ jobs:
         cd joplin        
         yarn install        
         cd packages/app-desktop        
-        yarn run dist --publish=never         
+        yarn run dist --publish=never     
         echo "DIST=$PWD/dist" >> $GITHUB_ENV              
         
     - name: Upload firmware to release
