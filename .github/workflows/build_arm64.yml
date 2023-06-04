@@ -7,11 +7,6 @@ on:
     tags:
       - 'v*.*.*'
   
-
-env:
-  REPO_URL: https://github.com/laurent22/joplin
-  REPO_BRANCH: dev
-
 jobs:
   build:
     runs-on: macos-latest
@@ -21,28 +16,23 @@ jobs:
       with:
         node-version: '18'
     
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
+      with: 
+        repository: laurent22/joplin
+        token: ${{ secret.GITHUB_TOKEN}}
+        ref: dev
+        path: joplin
+      
         
     - name: Set npm config flags
       run: |
         corepack enable
-        # export npm_config_arch=arm64
-        # export npm_target_arch=arm64
-        # export sdkroot=macosx
-        # npm config set python python3
-        
-    - name: Clone source code      
-      run: |        
-        git clone $REPO_URL -b $REPO_BRANCH joplin   
-        
+                
     - name: modify the traget
       run: |
         sed -i '' 's/\"target\": \"dmg\",/\"target\": \{\"target\": \"default\",\"arch\": \[\"x64\",\"arm64\", \"universal\"]},/g' joplin/packages/app-desktop/package.json
-        # sed -i '' 's/"electron-builder": "22.11.7"/"electron-builder": "23.0.6"/g' joplin/packages/app-desktop/package.json
-        # echo YARN_ENABLE_IMMUTABLE_INSTALLS=false >> $GITHUB_ENV
-        # sed -i '' 's/electron-builder: 22.11.7/electron-builder: 22.14.13/g' joplin/yarn.lock
-        
-        echo PYTHON_PATH=$(which python) >> $GITHUB_ENV
+                
+        export PYTHON_PATH=$(which python)
         
         tag=$(cat joplin/packages/app-desktop/package.json|grep \"version\"|awk  '{print $2}'|sed 's/"//g'|sed 's/,//g')
         echo "TAG=v$tag" >> $GITHUB_ENV
@@ -56,10 +46,8 @@ jobs:
       run: |
         cd joplin        
         yarn install        
-        cd packages/app-desktop
-        yarn run dist --publish=never --mac --arm64
-        # yarn run dist --publish=never 
-        # yarn run dist --publish=never -mwl
+        cd packages/app-desktop        
+        yarn run dist --publish=never         
         echo "DIST=$PWD/dist" >> $GITHUB_ENV              
         
     - name: Upload firmware to release
@@ -70,6 +58,6 @@ jobs:
         tag_name: ${{ env.TAG }}     
         files: |
           ${{ env.DIST }}/*.dmg
-          ${{ env.DIST }}/*.AppImage
+          
 
     
