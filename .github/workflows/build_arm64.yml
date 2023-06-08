@@ -4,7 +4,7 @@ name: build_arm64
 on:  
   push:
     tags:
-      - 'v**.**.**'  
+      - '*'  
   workflow_dispatch:
   
 jobs:
