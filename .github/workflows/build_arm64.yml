@@ -28,7 +28,7 @@ jobs:
                 
     - name: modify the traget
       run: |
-        sed -i '' 's/\"target\": \"dmg\",/\"target\": \{\"target\": \"dmg\",\"arch\": \[\"x64\",\"arm64\", \"universal\"]},/g' joplin/packages/app-desktop/package.json
+        # sed -i '' 's/\"target\": \"dmg\",/\"target\": \{\"target\": \"dmg\",\"arch\": \[\"x64\",\"arm64\", \"universal\"]},/g' joplin/packages/app-desktop/package.json
                 
         echo PYTHON_PATH=$(which python) >> $GITHUB_ENV
         
@@ -42,10 +42,13 @@ jobs:
 
     - name: Build & pack
       run: |
-        cd joplin        
-        yarn install        
-        cd packages/app-desktop        
-        yarn run dist --publish=never     
+        export npm_config_arch=arm64
+        export npm_config_target_arch=arm64
+        yarn install
+        cd joplin/packages/app-desktop        
+        npm pkg set 'build.mac.target.target'='default'
+        npm pkg set 'build.mac.target.arch[0]'='arm64'         
+        yarn run dist --publish=never --mac --arm64
         echo "DIST=$PWD/dist" >> $GITHUB_ENV              
         
     - name: Upload firmware to release
