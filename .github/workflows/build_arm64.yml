@@ -2,9 +2,9 @@ name: build_arm64
 
 # on: [push, pull_request]
 on:  
-  push:
-    tags:
-      - 'v*.*.*'  
+  #push:
+   # tags:
+    #  - 'v*.*.*'  
   workflow_dispatch:
   
 jobs:
